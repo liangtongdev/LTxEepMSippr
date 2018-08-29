@@ -11,7 +11,7 @@
 /**
  * @brief 用户名认证登录
  **/
-+(void)loginWithName:(NSString*)username password:(NSString*)password complete:(LTxStringCallbackBlock)complete{
++(void)loginWithName:(NSString*)username password:(NSString*)password complete:(LTxAuthorizationCallbackBlock)complete{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     LTxCoreConfig* config = [LTxCoreConfig sharedInstance];
     if (username) {
@@ -27,7 +27,21 @@
     //网络访问
     [LTxCoreHttpService doPostWithURL:url param:params complete:^(NSString *errorTips, id data) {
         if (complete) {
-            complete(errorTips);
+            BOOL success;
+            if (!errorTips) {
+                success = YES;
+            }else{
+                if (data) {//实际上是认证失败了
+                    success = NO;
+                }else{
+                    success = YES;
+                }
+            }
+            NSDictionary* firstItem;
+            if ([data count] > 0) {
+                firstItem = [data objectAtIndex:0];
+            }
+            complete(success,errorTips,firstItem);
         }
     }];
 }
@@ -35,7 +49,7 @@
 /**
  * @brief 手机号认证登录
  **/
-+(void)loginWithPhone:(NSString*)phoneNumber smsCode:(NSString*)smsCode complete:(LTxStringCallbackBlock)complete{
++(void)loginWithPhone:(NSString*)phoneNumber smsCode:(NSString*)smsCode complete:(LTxAuthorizationCallbackBlock)complete{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     LTxCoreConfig* config = [LTxCoreConfig sharedInstance];
     NSString* deviceCode = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
@@ -56,7 +70,21 @@
     //网络访问
     [LTxCoreHttpService doPostWithURL:url param:params complete:^(NSString *errorTips, id data) {
         if (complete) {
-            complete(errorTips);
+            BOOL success;
+            if (!errorTips) {
+                success = YES;
+            }else{
+                if (data) {//实际上是认证失败了
+                    success = NO;
+                }else{
+                    success = YES;
+                }
+            }
+            NSDictionary* firstItem;
+            if ([data count] > 0) {
+                firstItem = [data objectAtIndex:0];
+            }
+            complete(success,errorTips,firstItem);
         }
     }];
 }
@@ -95,7 +123,7 @@
 /**
  * @brief 获取服务地址
  **/
-+(void)appHostFetchComplete:(LTxBoolCallbackBlock)complete{
++(void)appHostFetchComplete:(LTxStringCallbackBlock)complete{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     LTxCoreConfig* config = [LTxCoreConfig sharedInstance];
     if (config.userId) {
@@ -124,12 +152,11 @@
                 }
             }
             if (complete) {
-                complete(YES);
+                complete(errorTips);
             }
         }else{
             if (complete) {
-                NSString* updateHost = [NSUserDefaults lt_objectForKey:USERDEFAULT_APP_UPDATE_HOST];
-                complete(updateHost != nil);
+                complete(errorTips);
             }
         }
         

@@ -8,16 +8,21 @@
 #import <Foundation/Foundation.h>
 #import <LTxCore/LTxCore.h>
 
+
+typedef void (^LTxAuthorizationCallbackBlock)(BOOL, NSString*, NSDictionary*);
+
+
 @interface LTxEepMBaseViewModel : NSObject
+
 /**
  * @brief 用户名认证登录
  **/
-+(void)loginWithName:(NSString*)username password:(NSString*)password complete:(LTxStringCallbackBlock)complete;
++(void)loginWithName:(NSString*)username password:(NSString*)password complete:(LTxAuthorizationCallbackBlock)complete;
 
 /**
  * @brief 手机号认证登录
  **/
-+(void)loginWithPhone:(NSString*)phoneNumber smsCode:(NSString*)smsCode complete:(LTxStringCallbackBlock)complete;
++(void)loginWithPhone:(NSString*)phoneNumber smsCode:(NSString*)smsCode complete:(LTxAuthorizationCallbackBlock)complete;
 
 ///#begin
 /**
@@ -29,6 +34,6 @@
 /**
  * @brief 获取服务地址
  **/
-+(void)appHostFetchComplete:(LTxBoolCallbackBlock)complete;
++(void)appHostFetchComplete:(LTxStringCallbackBlock)complete;
 
 @end
