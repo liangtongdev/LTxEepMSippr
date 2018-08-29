@@ -1,0 +1,6 @@
+framework module Pods_LTxEepMSipprDemo {
+  umbrella header "Pods-LTxEepMSipprDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}
