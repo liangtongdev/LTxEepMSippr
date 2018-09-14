@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "LTxEepMSippr"
-    s.version      = "0.0.2"
+    s.version      = "0.0.3"
     s.summary      = "EEPJ平台服务移动端的接口(SIPPR). "
     s.license      = "MIT"
     s.author             = { "liangtong" => "liangtongdev@163.com" }

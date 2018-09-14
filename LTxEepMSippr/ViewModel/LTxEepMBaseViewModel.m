@@ -123,7 +123,7 @@
 /**
  * @brief 获取服务地址
  **/
-+(void)appHostFetchComplete:(LTxStringCallbackBlock)complete{
++(void)appHostFetchComplete:(LTxStringAndArrayCallbackBlock)complete{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     LTxCoreConfig* config = [LTxCoreConfig sharedInstance];
     if (config.userId) {
@@ -152,11 +152,11 @@
                 }
             }
             if (complete) {
-                complete(errorTips);
+                complete(errorTips,hostArray);
             }
         }else{
             if (complete) {
-                complete(errorTips);
+                complete(errorTips,hostArray);
             }
         }
         

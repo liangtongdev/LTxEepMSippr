@@ -34,6 +34,6 @@ typedef void (^LTxAuthorizationCallbackBlock)(BOOL, NSString*, NSDictionary*);
 /**
  * @brief 获取服务地址
  **/
-+(void)appHostFetchComplete:(LTxStringCallbackBlock)complete;
++(void)appHostFetchComplete:(LTxStringAndArrayCallbackBlock)complete;
 
 @end
