@@ -122,8 +122,8 @@
 +(void)appHostFetchComplete:(LTxStringAndArrayCallbackBlock)complete{
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     LTxCoreConfig* config = [LTxCoreConfig sharedInstance];
-    if (config.userId) {
-        [params setObject:config.userId forKey:@"userId"];
+    if (config.userNumber) {
+        [params setObject:config.userNumber forKey:@"userNumber"];
     }
     
     
