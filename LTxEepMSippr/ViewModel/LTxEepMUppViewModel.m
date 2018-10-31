@@ -342,11 +342,11 @@
     if (deviceCode) {
         [params setObject:deviceCode forKey:@"deviceCode"];
     }
-    [params setObject:@"iOS" forKey:@"platform"];
+    [params setObject:@"ios" forKey:@"platform"];
     [params setObject:[NSNumber numberWithInteger:operateType] forKey:@"operateType"];
     NSString* url = [NSString stringWithFormat:@"%@/v1/api/mobile/sms/send",config.messageHost];
     //网络访问
-    [LTxCoreHttpService doGetWithURL:url param:params complete:^(NSString *errorTips, id data) {
+    [LTxCoreHttpService doPostWithURL:url param:params complete:^(NSString *errorTips, id data) {
         if (complete) {
             complete( errorTips);
         }
@@ -371,7 +371,7 @@
     if (deviceCode) {
         [params setObject:deviceCode forKey:@"deviceCode"];
     }
-    [params setObject:@"iOS" forKey:@"platform"];
+    [params setObject:@"ios" forKey:@"platform"];
     NSString* url = [NSString stringWithFormat:@"%@/v1/api/mobile/sms/check",config.messageHost];
     //网络访问
     [LTxCoreHttpService doPostWithURL:url param:params complete:^(NSString *errorTips, id data) {
